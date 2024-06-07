@@ -1,18 +1,34 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html>
-  <head>  
-    <meta charset=utf-8 />  
-    <title>Exercice 3</title>  
+  <head>
+    <meta charset="utf-8" />
+    <title>Exercice 3</title>
     <script>
       function Init() {
-    
+        // Récupération du bouton
+        let button = document.getElementById("jsstyle");
+        console.log(button);
+        // Récupération du texte
+        let text = document.getElementById("text");
+        console.log(text);
+        // Changement du style du texte
+        button.addEventListener("click", function () {
+          // Changement de la couleur du texte en rouge
+          text.style.color = "blue";
+          // Changement de la taille de la police
+          text.style.fontSize = "14px";
+          // Changement de la police
+          text.style.fontFamily = "Comic Sans MS";
+
+          console.log(text.style);
+        });
       }
     </script>
   </head>
-  <body onload="Init()">   
-    <p id ="text">Exercices en JavaScript</p>   
-    <div>  
-      <button id="jsstyle">Style</button>  
-    </div>  
-  </body>    
+  <body onload="Init()">
+    <p id="text">Exercices en JavaScript</p>
+    <div>
+      <button id="jsstyle">Style</button>
+    </div>
+  </body>
 </html>
