@@ -1,17 +1,30 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html>
-  <head>  
-    <meta charset=utf-8 />  
+  <head>
+    <meta charset="utf-8" />
     <title>Exercice 1</title>
     <script>
       function Init() {
-  
+        let aGoogle = document.getElementById("google");
+        let aNewlink = document.getElementById("newlink");
+
+        let atrLink = aGoogle.getAttribute("href");
+        let atrRel = aGoogle.getAttribute("rel");
+        let atrTarget = aGoogle.getAttribute("target");
+        let atrHreflang = aGoogle.getAttribute("hreflang");
+        let atrType = aGoogle.getAttribute("type");
+        console.log(atrHreflang + " " + atrRel + " " + atrTarget + " " + atrType + " " + atrLink);
+        aNewlink.setAttribute("href", "https://github.com/mmarzou");
       }
-    </script>      
+    </script>
   </head>
-  <body onload="Init()">   
-    <p><a id="google" type="text/html" hreflang="fr-fr" rel="nofollow" target="_self" href="http://www.google.fr">Google</a></p>
-    <p><a id="newlink" >un nouveau lien</a></p>
+  <body onload="Init()">
+    <p>
+      <a id="google" type="text/html" hreflang="fr-fr" rel="nofollow" target="_self" href="http://www.google.fr"
+        >Google</a
+      >
+    </p>
+    <p><a id="newlink">un nouveau lien</a></p>
     <button>Afficher</button>
-  </body>    
+  </body>
 </html>
