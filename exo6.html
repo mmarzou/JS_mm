@@ -1,80 +1,111 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8"> 
-		<title>popup</title>
-		<style>
-			body
-			{
-				font-family: sans;
-				padding-top: 100px;
-			}
 
-			#connectes
-			{
-				background-color: #eee;
-				width: 150px;
-				padding: .5em;
-			}
+<head>
+	<meta charset="utf-8">
+	<title>popup</title>
+	<style>
+		body {
+			font-family: sans;
+			padding-top: 100px;
+		}
 
-			.popup-mot
-			{
-				font-weight: bold;
-				cursor: pointer;
-			}
+		#connectes {
+			background-color: #eee;
+			width: 150px;
+			padding: .5em;
+		}
 
-			#close {
-				cursor: pointer;
-			}
+		.popup-mot {
+			font-weight: bold;
+			cursor: pointer;
+		}
 
-			.popup
-			{
-				position: absolute;
-				display: none;
-				width: 200px;
-				background-color: white;
-				padding: .7em;
-				box-shadow: 1px 1px 3px rgba(0,0,0,.4);
-				font-size: 12px;
-			}
-			.popup h2
-			{
-				margin-top: .2em;
-			}
+		#close {
+			cursor: pointer;
+		}
 
-			.popup>.fermer
-			{
-				position: absolute;
-				top: 0;
-				right: 0;
-				padding: .5em;
-				padding-top: .1em;
-			}
+		.popup {
+			position: absolute;
+			display: none;
+			width: 200px;
+			background-color: white;
+			padding: .7em;
+			box-shadow: 1px 1px 3px rgba(0, 0, 0, .4);
+			font-size: 12px;
+		}
 
-			.popup .photo
-			{
-				width: 80px;
-				height: auto;
-				float: right;
-				margin-left: .2em;
-				margin-bottom: .2em;
-			}			
-		</style>
-	</head>
-	<body onload="Init()">
+		.popup h2 {
+			margin-top: .2em;
+		}
+
+		.popup>.fermer {
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: .5em;
+			padding-top: .1em;
+		}
+
+		.popup .photo {
+			width: 80px;
+			height: auto;
+			float: right;
+			margin-left: .2em;
+			margin-bottom: .2em;
+		}
+	</style>
+</head>
+
+<body onload="Init()">
 	<div id="connectes">
 		<p>Connectés : </p>
 		<ul>
-			<li><span class="popup-mot" data-popup="joe" >Joe</span></li>
+			<li><span class="popup-mot" data-popup="joe">Joe</span></li>
 			<li><span class="popup-mot" data-popup="marc">Marc</span></li>
 			<li><span class="popup-mot" data-popup="lian">Lian</span></li>
 		</ul>
 	</div>
 	<div id="popup" class="popup">
 		<span id="close" class="fermer">X</span>
-		<img src="joe.png" alt="joe" class="photo"/>
+		<img src="joe.png" alt="joe" class="photo" />
 		<h2>Joe</h2>
 	</div>
-	</body>
+
+	<script>
+		var lis = document.querySelectorAll('#connectes .popup-mot');
+
+		// Récupérez l'élément popup
+		var popup = document.getElementById('popup');
+
+		// Récupérez l'élément close
+		var close = document.getElementById('close');
+
+		// Pour chaque élément li
+		lis.forEach(function (li) {
+			// Ajoutez un écouteur d'événements 'click'
+			li.addEventListener('click', function () {
+				// Récupérez le contenu de l'attribut data-popup
+				var name = this.getAttribute('data-popup');
+
+				// Modifiez le style display du popup avec la valeur 'block'
+				popup.style.display = 'block';
+
+				// Modifiez l'image du popup avec le fichier correspondant au nom
+				popup.querySelector('.photo').src = name + '.png';
+				popup.querySelector('.photo').alt = name;
+
+				// Modifiez le texte de h2 avec le nom
+				popup.querySelector('h2').textContent = name;
+			});
+		});
+
+		// Ajoutez un écouteur d'événements 'click' à l'élément close
+		close.addEventListener('click', function () {
+			// Modifiez le style display du popup avec la valeur 'none'
+			popup.style.display = 'none';
+		});
+	</script>
+</body>
 
 </html>

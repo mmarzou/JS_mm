@@ -1,58 +1,61 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
+
+<head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <title>Calculette</title>
   <style>
     form {
-        margin: 0 auto;
-        width: 450px;
-        padding: 1em;
-        border: 1px solid #CCC;
-        border-radius: 1em;
+      margin: 0 auto;
+      width: 450px;
+      padding: 1em;
+      border: 1px solid #CCC;
+      border-radius: 1em;
     }
-    
-    form div + div {
-        margin-top: 1em;
-    }  
-  
+
+    form div+div {
+      margin-top: 1em;
+    }
+
     label {
-        display: inline-block;
-        width: 110px;
-        text-align: right;
+      display: inline-block;
+      width: 110px;
+      text-align: right;
     }
-  
-    input, textarea {
-        font: 1em sans-serif;
-        width: 300px;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        border: 1px solid #999;
-    }
-  
-    input:focus, textarea:focus {
-        border-color: #000;
-    }
-  
+
+    input,
     textarea {
-        vertical-align: top;
-        height: 5em;
-        resize: vertical;
+      font: 1em sans-serif;
+      width: 300px;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      border: 1px solid #999;
     }
-  
+
+    input:focus,
+    textarea:focus {
+      border-color: #000;
+    }
+
+    textarea {
+      vertical-align: top;
+      height: 5em;
+      resize: vertical;
+    }
+
     .button {
-        padding-left: 110px;
-        margin-left: .5em;
-        clear: both;
-    }    
+      padding-left: 110px;
+      margin-left: .5em;
+      clear: both;
+    }
 
     .erreurs {
-      color:red;
-      padding:5px;
+      color: red;
+      padding: 5px;
     }
 
     .resultatText {
-      float: left;      
+      float: left;
       width: 110px;
       text-align: right;
     }
@@ -61,40 +64,76 @@
       padding-left: 5px;
     }
   </style>
-  </head>
-  <body>    
-    <form action="" id="calculette">
-      <div id="erreurs" class="erreurs">
-      </div>
-      <div>
-        <label for="opa">Opérande a :</label>
-        <input type="text" id="opa" name="opa" />
-      </div>
-      <div>
-        <label for="opb">Opérande b :</label>
-        <input type="text" id="opb" name="opb" />
-      </div>
-      <div>
-          <label for="operateurs">Opérateurs :</label>
-  
-          <select id="operateurs" name="operateurs">
-          	<option value="none">Sélectionnez un opérateur</option>
-          	<option value="ad">Addition</option>
-          	<option value="so">Soustraction</option>
-          	<option value="mu">Multiplication</option>
-          	<option value="di">Division</option>
-        	</select>
-      </div>
-      <div>
-        <span class="resultatText">Résultat :</span>
-        <span id="resultat" class="resultat">
-        </span>
-      </div>
-      <div class="button">
-        <button type="submit" name="calculer">Calculer</button>
-      </div>
-    </form>
-    
-  </body>
-  
+</head>
+
+<body>
+  <form action="" id="calculette">
+    <div id="erreurs" class="erreurs">
+    </div>
+    <div>
+      <label for="opa">Opérande a :</label>
+      <input type="text" id="opa" name="opa" />
+    </div>
+    <div>
+      <label for="opb">Opérande b :</label>
+      <input type="text" id="opb" name="opb" />
+    </div>
+    <div>
+      <label for="operateurs">Opérateurs :</label>
+
+      <select id="operateurs" name="operateurs">
+        <option value="none">Sélectionnez un opérateur</option>
+        <option value="ad">Addition</option>
+        <option value="so">Soustraction</option>
+        <option value="mu">Multiplication</option>
+        <option value="di">Division</option>
+      </select>
+    </div>
+    <div>
+      <span class="resultatText">Résultat :</span>
+      <span id="resultat" class="resultat">
+      </span>
+    </div>
+    <div class="button">
+      <button type="submit" name="calculer">Calculer</button>
+    </div>
+  </form>
+  <script>
+    document.getElementById('calculette').addEventListener('submit', function (e) {
+      var operand1 = parseFloat(document.getElementById('opa').value);
+      var operand2 = parseFloat(document.getElementById('opb').value);
+      var operator = document.getElementById('operateurs').value;
+
+      if (!operand1 || !operand2 || operator === 'none') {
+        e.preventDefault();
+        document.getElementById('erreurs').textContent = 'Veuillez renseigner tous les champs';
+      } else {
+        var result;
+        switch (operator) {
+          case 'ad':
+            result = operand1 + operand2;
+            break;
+          case 'so':
+            result = operand1 - operand2;
+            break;
+          case 'mu':
+            result = operand1 * operand2;
+            break;
+          case 'di':
+            if (operand2 !== 0) {
+              result = operand1 / operand2;
+            } else {
+              e.preventDefault();
+              document.getElementById('erreurs').textContent = 'Division par zéro impossible';
+              return;
+            }
+            break;
+        }
+        e.preventDefault();
+        document.getElementById('resultat').textContent = result;
+      }
+    });
+  </script>
+</body>
+
 </html>
